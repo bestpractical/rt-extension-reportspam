@@ -1,0 +1,9 @@
+NAME
+    RT::Extension::ReportSpam - report a spam in one click in RT
+
+AUTHOR
+    Ruslan Zakirov <Ruslan.Zakirov@gmail.com>
+
+LICENSE
+    Under the same terms as perl itself.
+

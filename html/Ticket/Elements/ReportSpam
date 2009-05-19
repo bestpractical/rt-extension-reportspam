@@ -1,0 +1,46 @@
+<span id="toggle-ticket-spam-<% $id %>">
+% my $url = $RT::WebPath ."/Helpers/Toggle/TicketSpam?id=". $id;
+<a align="right" href="<% $url %>" onclick="ahah('<% $url |n %>', 'toggle-ticket-spam-<% $id |n %>'); return false;" >
+% if ( $reported ) {
+<img src="<% $RT::WebPath %>/NoAuth/images/star.gif" alt="<% loc('Not Spam') %>" style="border-style: none" />
+% } else {
+<img src="<% $RT::WebPath %>/NoAuth/images/empty_star.gif" alt="<% loc('Report Spam') %>" style="border-style: none" />
+% }
+</a>
+</span>
+<%ARGS>
+$id
+$Toggle => 0
+</%ARGS>
+<%INIT>
+my $uid = $session{'CurrentUser'}->id;
+
+my $ticket = RT::Ticket->new( $session{'CurrentUser'} );
+$ticket->Load( $id );
+return unless $id = $ticket->id;
+
+my $reports = $ticket->FirstAttribute('SpamReports');
+$reports = $reports->Content if $reports;
+$reports ||= [];
+
+my $reported = grep $_ == $uid, @$reports;
+
+if ( $Toggle ) {
+    if ( $reported ) {
+        @$reports = grep $_ != $uid, @$reports;
+    } else {
+        push @$reports, $uid;
+    }
+    if ( @$reports ) {
+        $ticket->SetAttribute(
+            Name    => 'SpamReports',
+            Content => $reports,
+        );
+    } else {
+        $ticket->DeleteAttribute(
+            Name    => 'SpamReports',
+        );
+    }
+    $reported = !$reported;
+}
+</%INIT>
