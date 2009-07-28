@@ -32,11 +32,13 @@ if ( $Toggle ) {
         push @$reports, $uid;
     }
     if ( @$reports ) {
+        $ticket->SetStatus('deleted');
         $ticket->SetAttribute(
             Name    => 'SpamReports',
             Content => $reports,
         );
     } else {
+        $ticket->SetStatus('open');
         $ticket->DeleteAttribute(
             Name    => 'SpamReports',
         );
