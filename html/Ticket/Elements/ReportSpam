@@ -32,16 +32,30 @@ if ( $Toggle ) {
         push @$reports, $uid;
     }
     if ( @$reports ) {
-        $ticket->SetStatus('deleted');
-        $ticket->SetAttribute(
+        if ( $ticket->CurrentUserHasRight('DeleteTicket') ) {
+            my ($status, $msg) = $ticket->SetStatus('deleted');
+            $RT::Logger->error("Couldn't delete ticket: $msg")
+                unless $status;
+        }
+        my ($status, $msg) = $ticket->SetAttribute(
             Name    => 'SpamReports',
             Content => $reports,
         );
+        $RT::Logger->error("Couldn't set attribute: $msg")
+            unless $status;
     } else {
-        $ticket->SetStatus('open');
-        $ticket->DeleteAttribute(
-            Name    => 'SpamReports',
+        if ( $ticket->Status eq 'deleted'
+            && $ticket->CurrentUserHasRight('ModifyTicket')
+        ) {
+            my ($status, $msg) = $ticket->SetStatus('open');
+            $RT::Logger->error("Couldn't delete ticket: $msg")
+                unless $status;
+        }
+        my ($status, $msg) = $ticket->DeleteAttribute(
+            'SpamReports'
         );
+        $RT::Logger->error("Couldn't delete attribute: $msg")
+            unless $status;
     }
     $reported = !$reported;
 }
