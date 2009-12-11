@@ -1,0 +1,14 @@
+0.02 2009-12-12
+
+    * delete the ticket when it's reported as spam and user has
+      rights
+    * open deleted ticket when it's un-reported by all and last
+      person has rights to change status
+    * Tools/Spam/ - simple spam handling interface
+    * ReportSpam for tickets search results
+    * icons for 'not spam' and 'spam'
+    * fixed un-reporting, DeleteAttrbute was called improperly
+
+0.01 2009-05-19
+
+    * intial release
