@@ -1,0 +1,9 @@
+<%ARGS>
+$tabs => {}
+</%ARGS>
+<%INIT>
+$tabs->{'e'} = {
+    title => loc('Spam'),
+    path  => 'Tools/Spam/',
+},
+</%INIT>
