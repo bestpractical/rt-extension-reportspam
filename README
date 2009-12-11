@@ -1,6 +1,15 @@
 NAME
     RT::Extension::ReportSpam - report a spam in one click in RT
 
+DESCRIPTION
+    A simple extension that works with RT 3.6 and newer and allows users to
+    report a ticket as a spam message.
+
+    To find all tickets reported as spam you have to use query builder in
+    advanced mode with the following query:
+
+        HasAttribute = 'SpamReports'
+
 AUTHOR
     Ruslan Zakirov <Ruslan.Zakirov@gmail.com>
 
