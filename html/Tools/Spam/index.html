@@ -1,0 +1,12 @@
+<& /Elements/Header, Title => $title &>
+<& /Tools/Spam/Elements/Tabs,
+    Title       => $title,
+    current_tab => "Tools/Spam/",
+&>
+
+<p>
+<% loc('You can either <a href="Recent.html">review recenlty</a> created tickets or <a href="Reported.html">review reported</a> tickets that are still not deleted.') |n %>
+</p>
+<%INIT>
+my $title = loc("Spam handling");
+</%INIT>
