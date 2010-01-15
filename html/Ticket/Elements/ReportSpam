@@ -2,9 +2,9 @@
 % my $url = $RT::WebPath ."/Helpers/Toggle/TicketSpam?id=". $id;
 <a align="right" href="<% $url %>" onclick="ahah('<% $url |n %>', 'toggle-ticket-spam-<% $id |n %>'); return false;" >
 % if ( $reported ) {
-<img src="<% $RT::WebPath %>/NoAuth/images/spam.gif" alt="<% loc('Not Spam') %>" style="border-style: none" />
+<img src="<% $RT::WebPath %>/NoAuth/images/spam.png" alt="<% loc('Not Spam') %>" style="border-style: none;" />
 % } else {
-<img src="<% $RT::WebPath %>/NoAuth/images/empty_spam.gif" alt="<% loc('Report Spam') %>" style="border-style: none" />
+<img src="<% $RT::WebPath %>/NoAuth/images/empty_spam.png" alt="<% loc('Report Spam') %>" style="border-style: none;" />
 % }
 </a>
 </span>
