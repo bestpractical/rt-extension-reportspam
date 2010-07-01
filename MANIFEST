@@ -3,8 +3,8 @@ html/Callbacks/RT-Extension-ReportSpam/Elements/RT__Ticket/ColumnMap/Once
 html/Callbacks/RT-Extension-ReportSpam/Ticket/Elements/Tabs/Default
 html/Callbacks/RT-Extension-ReportSpam/Tools/Elements/Tabs/Default
 html/Helpers/Toggle/TicketSpam
-html/NoAuth/images/empty_spam.gif
-html/NoAuth/images/spam.gif
+html/NoAuth/images/empty_spam.png
+html/NoAuth/images/spam.png
 html/Ticket/Elements/ReportSpam
 html/Tools/Spam/Elements/Tabs
 html/Tools/Spam/index.html
