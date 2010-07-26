@@ -8,7 +8,7 @@ our $VERSION = '0.03';
 
 =head1 NAME
 
-RT::Extension::ReportSpam - report a spam in one click in RT
+RT::Extension::ReportSpam - mark tickets as spam with one click
 
 =head1 DESCRIPTION
 
