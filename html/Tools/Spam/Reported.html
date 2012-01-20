@@ -1,8 +1,5 @@
 <& /Elements/Header, Title => $title &>
-<& /Tools/Spam/Elements/Tabs,
-    Title => $title,
-    current_tab => "Tools/Spam/Reported.html",
-&>
+<& /Elements/Tabs &>
 
 <& /Elements/ListActions, actions => \@results &>
 
@@ -39,6 +36,7 @@ $Format ||= qq{
     '<b><a href="__WebPath__/Ticket/Display.html?id=__id__">__Subject__</a></b>/TITLE:Subject',
     Requestors,
     QueueName,
+    Status,
     ReportSpam
 };
 </%INIT>
