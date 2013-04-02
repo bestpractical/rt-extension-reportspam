@@ -1,10 +1,10 @@
 <span id="toggle-ticket-spam-<% $id %>">
-% my $url = $RT::WebPath ."/Helpers/Toggle/TicketSpam?id=". $id;
-<a align="right" href="<% $url %>" onclick="ahah('<% $url |n %>', 'toggle-ticket-spam-<% $id |n %>'); return false;" >
+% my $url = RT->Config->Get("WebPath") ."/Helpers/Toggle/TicketSpam?id=". $id;
+<a align="right" href="<% $url %>" onclick="ahah(<% $url |j %>, 'toggle-ticket-spam-'+<% $id |j %>); return false;" >
 % if ( $reported ) {
-<img src="<% $RT::WebPath %>/NoAuth/images/spam.png" alt="<% loc('Not Spam') %>" style="border-style: none;" />
+<img src="<% RT->Config->Get("WebPath") %>/NoAuth/images/spam.png" alt="<% loc('Not Spam') %>" style="border-style: none;" />
 % } else {
-<img src="<% $RT::WebPath %>/NoAuth/images/empty_spam.png" alt="<% loc('Report Spam') %>" style="border-style: none;" />
+<img src="<% RT->Config->Get("WebPath") %>/NoAuth/images/empty_spam.png" alt="<% loc('Report Spam') %>" style="border-style: none;" />
 % }
 </a>
 </span>
@@ -34,27 +34,27 @@ if ( $Toggle ) {
     if ( @$reports ) {
         if ( $ticket->CurrentUserHasRight('DeleteTicket') ) {
             my ($status, $msg) = $ticket->SetStatus('deleted');
-            $RT::Logger->error("Couldn't delete ticket: $msg")
+            RT->Logger->error("Couldn't delete ticket: $msg")
                 unless $status;
         }
         my ($status, $msg) = $ticket->SetAttribute(
             Name    => 'SpamReports',
             Content => $reports,
         );
-        $RT::Logger->error("Couldn't set attribute: $msg")
+        RT->Logger->error("Couldn't set attribute: $msg")
             unless $status;
     } else {
         if ( $ticket->Status eq 'deleted'
             && $ticket->CurrentUserHasRight('ModifyTicket')
         ) {
             my ($status, $msg) = $ticket->SetStatus('open');
-            $RT::Logger->error("Couldn't delete ticket: $msg")
+            RT->Logger->error("Couldn't delete ticket: $msg")
                 unless $status;
         }
         my ($status, $msg) = $ticket->DeleteAttribute(
             'SpamReports'
         );
-        $RT::Logger->error("Couldn't delete attribute: $msg")
+        RT->Logger->error("Couldn't delete attribute: $msg")
             unless $status;
     }
     $reported = !$reported;

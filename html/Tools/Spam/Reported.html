@@ -1,13 +1,10 @@
-<& /Elements/Header, Title => $title &>
-<& /Tools/Spam/Elements/Tabs,
-    Title => $title,
-    current_tab => "Tools/Spam/Reported.html",
-&>
+<& /Elements/Header, Title => loc("Reported tickets") &>
+<& /Elements/Tabs &>
 
 <& /Elements/ListActions, actions => \@results &>
 
 <p>
-<% loc('Tickets reported as spam by other without rights to delete tickets.') %>
+<% loc('Tickets reported as spam by others without rights to delete tickets.') %>
 <% loc('Confirm by clicking "S".') %>
 <% loc('If you have rights to delete tickets then they will be deleted.') %>
 </p>
@@ -30,8 +27,6 @@ $Format => undef
 </%ARGS>
 <%INIT>
 my $Query = 'HasAttribute = "SpamReports"';
-
-my $title = loc('Recently created tickets');
 my @results;
 
 $Format ||= qq{
