@@ -1,6 +1,6 @@
 <span id="toggle-ticket-spam-<% $id %>">
 % my $url = $RT::WebPath ."/Helpers/Toggle/TicketSpam?id=". $id;
-<a align="right" href="<% $url %>" onclick="ahah('<% $url |n %>', 'toggle-ticket-spam-<% $id |n %>'); return false;" >
+<a align="right" href="<% $url %>" onclick="ahah(<% $url |j %>, 'toggle-ticket-spam-'+<% $id |j %>); return false;" >
 % if ( $reported ) {
 <img src="<% $RT::WebPath %>/NoAuth/images/spam.png" alt="<% loc('Not Spam') %>" style="border-style: none;" />
 % } else {
