@@ -1,8 +1,5 @@
-<& /Elements/Header, Title => $title &>
-<& /Tools/Spam/Elements/Tabs,
-    Title => $title,
-    current_tab => "Tools/Spam/Recent.html",
-&>
+<& /Elements/Header, Title => loc("Recently created tickets") &>
+<& /Elements/Tabs &>
 
 <& /Elements/ListActions, actions => \@results &>
 
@@ -33,7 +30,6 @@ my $Query =
     .' AND Owner = "Nobody"'
     .' AND HasNoAttribute= "SpamReports"';
 
-my $title = loc('Recently created tickets');
 my @results;
 
 $Format ||= qq{
