@@ -1,4 +1,4 @@
-0.10    Mon Apr  1 20:51:14 PDT 2013
+0.10    Tue Apr  2 09:14:44 PDT 2013
 
     * RT 4.0 compatibility.  This release requires RT 4.0.  Users of 3.8 should
       not upgrade past version 0.03 of this extension.
