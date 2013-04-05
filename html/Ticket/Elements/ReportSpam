@@ -48,7 +48,7 @@ if ( $Toggle ) {
             && $ticket->CurrentUserHasRight('ModifyTicket')
         ) {
             my ($status, $msg) = $ticket->SetStatus('open');
-            RT->Logger->error("Couldn't delete ticket: $msg")
+            RT->Logger->error("Couldn't undelete ticket: $msg")
                 unless $status;
         }
         my ($status, $msg) = $ticket->DeleteAttribute(
