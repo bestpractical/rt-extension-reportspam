@@ -32,7 +32,7 @@ if ( $Toggle ) {
         push @$reports, $uid;
     }
     if ( @$reports ) {
-        if ( $ticket->CurrentUserHasRight('DeleteTicket') ) {
+        if (lc $ticket->Status ne 'deleted' and $ticket->CurrentUserHasRight('DeleteTicket')) {
             my ($status, $msg) = $ticket->SetStatus('deleted');
             RT->Logger->error("Couldn't delete ticket: $msg")
                 unless $status;
