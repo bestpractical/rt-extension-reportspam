@@ -40,7 +40,7 @@ if ( $Toggle ) {
         }
         elsif ($autodelete) {
             # Automatically delete or re-open depending on current report count
-            my $status = @$reports >= $autodelete ? 'deleted' : 'open';
+            my $status = @$reports >= $autodelete ? 'deleted' : $ticket->FirstActiveStatus;
 
             if (lc $ticket->Status ne lc $status) {
                 RT->Logger->debug(scalar @$reports . " spam reports for ticket @{[$ticket->id]}; automatically setting status to $status");
@@ -62,7 +62,7 @@ if ( $Toggle ) {
     } else {
         if (lc $ticket->Status eq 'deleted') {
             if ($ticket->CurrentUserHasRight('ModifyTicket')) {
-                my ($status, $msg) = $ticket->SetStatus('open');
+                my ($status, $msg) = $ticket->SetStatus($ticket->FirstActiveStatus);
                 RT->Logger->error("Couldn't undelete ticket: $msg")
                     unless $status;
             }
@@ -73,7 +73,7 @@ if ( $Toggle ) {
                 my $as_system = RT::Ticket->new( RT->SystemUser );
                 $as_system->Load($ticket->id);
 
-                my ($ok, $msg) = $as_system->SetStatus('open');
+                my ($ok, $msg) = $as_system->SetStatus($ticket->FirstActiveStatus);
                 RT->Logger->error("Couldn't undelete ticket as system: $msg")
                     unless $ok;
             }
