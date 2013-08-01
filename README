@@ -18,6 +18,13 @@ INSTALLATION
 
         or add "RT::Extension::ReportSpam" to your existing @Plugins line.
 
+        You may also want to set the $SpamAutoDeleteThreshold config option
+        to the number of spam reports required before the system will
+        automatically delete the ticket. This is useful if none of your
+        users have DeleteTicket themselves, but collectively they should be
+        able to delete spam tickets for good. Auto-delete is disabled by
+        leaving $SpamAutoDeleteThreshold unset or setting it to 0.
+
     Clear your mason cache
             rm -rf /opt/rt4/var/mason_data/obj
 

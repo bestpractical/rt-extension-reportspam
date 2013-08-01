@@ -24,6 +24,7 @@ $reports = $reports->Content if $reports;
 $reports ||= [];
 
 my $reported = grep $_ == $uid, @$reports;
+my $autodelete = RT->Config->Get("SpamAutoDeleteThreshold") || 0;
 
 if ( $Toggle ) {
     if ( $reported ) {
@@ -37,6 +38,21 @@ if ( $Toggle ) {
             RT->Logger->error("Couldn't delete ticket: $msg")
                 unless $status;
         }
+        elsif ($autodelete) {
+            # Automatically delete or re-open depending on current report count
+            my $status = @$reports >= $autodelete ? 'deleted' : 'open';
+
+            if (lc $ticket->Status ne lc $status) {
+                RT->Logger->debug(scalar @$reports . " spam reports for ticket @{[$ticket->id]}; automatically setting status to $status");
+
+                my $as_system = RT::Ticket->new( RT->SystemUser );
+                $as_system->Load($ticket->id);
+
+                my ($ok, $msg) = $as_system->SetStatus($status);
+                RT->Logger->error("Couldn't set ticket status to $status as system: $msg")
+                    unless $ok;
+            }
+        }
         my ($status, $msg) = $ticket->SetAttribute(
             Name    => 'SpamReports',
             Content => $reports,
@@ -44,12 +60,23 @@ if ( $Toggle ) {
         RT->Logger->error("Couldn't set attribute: $msg")
             unless $status;
     } else {
-        if ( $ticket->Status eq 'deleted'
-            && $ticket->CurrentUserHasRight('ModifyTicket')
-        ) {
-            my ($status, $msg) = $ticket->SetStatus('open');
-            RT->Logger->error("Couldn't undelete ticket: $msg")
-                unless $status;
+        if (lc $ticket->Status eq 'deleted') {
+            if ($ticket->CurrentUserHasRight('ModifyTicket')) {
+                my ($status, $msg) = $ticket->SetStatus('open');
+                RT->Logger->error("Couldn't undelete ticket: $msg")
+                    unless $status;
+            }
+            elsif ($autodelete) {
+                # Autodelete is enabled, but there are no reports so we should always re-open
+                RT->Logger->debug("No more spam reports for ticket @{[$ticket->id]}; automatically undeleting ticket");
+
+                my $as_system = RT::Ticket->new( RT->SystemUser );
+                $as_system->Load($ticket->id);
+
+                my ($ok, $msg) = $as_system->SetStatus('open');
+                RT->Logger->error("Couldn't undelete ticket as system: $msg")
+                    unless $ok;
+            }
         }
         my ($status, $msg) = $ticket->DeleteAttribute(
             'SpamReports'
