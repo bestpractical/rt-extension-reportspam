@@ -1,3 +1,5 @@
+bin/auto-delete-retroactively
+bin/spam-report-statistics
 Changes
 html/Callbacks/RT-Extension-ReportSpam/Elements/RT__Ticket/ColumnMap/Once
 html/Callbacks/RT-Extension-ReportSpam/Elements/Tabs/Privileged

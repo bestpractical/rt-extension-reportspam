@@ -1,3 +1,13 @@
+0.12    Thu Aug  1 13:14:20 PDT 2013
+    * Auto-delete threshold
+    * Use the first active status of the lifecycle instead of hardcoding open
+    * Don't try to delete already deleted tickets
+    * Quick command-line tool to gather spam report stats
+
+0.11    Thu Aug  1 13:12:11 PDT 2013
+    * Improved usage docs
+    * Fix typo in error message when a ticket couldn't be undeleted
+
 0.10    Tue Apr  2 09:14:44 PDT 2013
 
     * RT 4.0 compatibility.  This release requires RT 4.0.  Users of 3.8 should
