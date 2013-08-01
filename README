@@ -5,18 +5,49 @@ DESCRIPTION
     A simple extension that works with RT 4.0 and newer and allows users to
     report a ticket as a spam message.
 
-    To find all tickets reported as spam you have to use query builder in
-    advanced mode with the following query:
+INSTALL
+    perl Makefile.PL
+    make
+    make install
+    Base configuration
+        In RT 4.0 and later, you must enable the plugin by adding
+        RT::Extension::ReportSpam to your @Plugins line (or create one) like:
 
-        HasAttribute = 'SpamReports'
+            Set(@Plugins,(qw(RT::Extension::ReportSpam)));
 
-RT 3.8
-    Users of this extension on RT 3.8 should not upgrade past version 0.03
-    of this extension.
+UPGRADING
+    RT 3.8
+        Users of this extension on RT 3.8 should not upgrade past version 0.03
+        of this extension.
+
+HOW TO USE
+    Report Spam
+        In the ticket display page, you can report the ticket as spam by clicking
+        "S".
+
+        Or clicking menu "Tools->Spam->Recent" to get all the recently created
+        tickets with status "new" and without owner, you should also click "S" to
+        report spam.
+
+        At the same time, if you have rights to delete tickets then they will be
+        deleted directly.
+
+    Query All Tickets Reported as Spam
+        To find all tickets reported as spam and not deleted you can click menu
+        "Tools->Spam->Reported" or use query builder in advanced mode with the
+        following query:
+
+            HasAttribute = 'SpamReports'
+
+        to get the tickets reported as spam by others without rights to delete
+        tickets.
+
+    Mark a Ticket as Spam
+        You can confirm the reports by clicking "S" after querying all tickets reported as spam.
+        If you have rights to delete tickets then they will be deleted.
 
 AUTHOR
     Ruslan Zakirov <Ruslan.Zakirov@gmail.com>
 
 LICENSE
     Under the same terms as perl itself.
-
