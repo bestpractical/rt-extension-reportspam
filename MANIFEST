@@ -4,8 +4,6 @@ Changes
 html/Callbacks/RT-Extension-ReportSpam/Elements/RT__Ticket/ColumnMap/Once
 html/Callbacks/RT-Extension-ReportSpam/Elements/Tabs/Privileged
 html/Helpers/Toggle/TicketSpam
-html/NoAuth/images/empty_spam.png
-html/NoAuth/images/spam.png
 html/Ticket/Elements/ReportSpam
 html/Tools/Spam/index.html
 html/Tools/Spam/Recent.html
@@ -25,3 +23,5 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml
 README
+static/images/empty_spam.png
+static/images/spam.png

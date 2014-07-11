@@ -2,9 +2,9 @@
 % my $url = RT->Config->Get("WebPath") ."/Helpers/Toggle/TicketSpam?id=". $id;
 <a align="right" href="<% $url %>" onclick="ahah(<% $url |j %>, 'toggle-ticket-spam-'+<% $id |j %>); return false;" title="<% $reported ? loc("Not Spam") : loc("Report Spam") %>">
 % if ( $reported ) {
-<img src="<% RT->Config->Get("WebPath") %>/NoAuth/images/spam.png" alt="<% loc('Not Spam') %>" style="border-style: none;" />
+<img src="<% RT->Config->Get("WebPath") %>/<% $image_path %>/images/spam.png" alt="<% loc('Not Spam') %>" style="border-style: none;" />
 % } else {
-<img src="<% RT->Config->Get("WebPath") %>/NoAuth/images/empty_spam.png" alt="<% loc('Report Spam') %>" style="border-style: none;" />
+<img src="<% RT->Config->Get("WebPath") %>/<% $image_path %>/images/empty_spam.png" alt="<% loc('Report Spam') %>" style="border-style: none;" />
 % }
 </a>
 </span>
@@ -13,6 +13,7 @@ $id
 $Toggle => 0
 </%ARGS>
 <%INIT>
+my $image_path = defined $RT::StaticPath ? 'static' : 'NoAuth';
 my $uid = $session{'CurrentUser'}->id;
 
 my $ticket = RT::Ticket->new( $session{'CurrentUser'} );
