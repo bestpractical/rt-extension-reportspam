@@ -14,7 +14,7 @@ RT::Extension::ReportSpam - mark tickets as spam with one click
 
 =head1 DESCRIPTION
 
-A simple extension that works with RT 4.0 and newer and allows users
+A simple extension that works with RT 4.0 and 4.2 which allows users
 to report a ticket as a spam message.
 
 =head1 INSTALLATION 
@@ -31,11 +31,15 @@ May need root permissions
 
 =item Edit your F</opt/rt4/etc/RT_SiteConfig.pm>
 
-Add this line:
+If you are using RT 4.2 or greater, add this line:
 
-    Set(@Plugins, qw(RT::Extension::ReportSpam));
+    Plugin('{{RT::Extension::ReportSpam}}');
 
-or add C<RT::Extension::ReportSpam> to your existing C<@Plugins> line.
+For RT 4.0, add this line:
+
+    Set(@Plugins, qw({{RT::Extension::ReportSpam}}));
+
+or add C<{{RT::Extension::ReportSpam}}> to your existing C<@Plugins> line.
 
 You may also want to set the C<$SpamAutoDeleteThreshold> config option to the
 number of spam reports required before the system will automatically delete the
@@ -87,15 +91,16 @@ as spam.  If you have rights to delete tickets then they will be deleted.
 =head1 BUGS
 
 All bugs should be reported via email to
-L<bug-RT-Extension-ReportSpam@rt.cpan.org|mailto:bug-RT-Extension-ReportSpam@rt.cpan.org>
+
+    L<bug-RT-Extension-ReportSpam@rt.cpan.org|mailto:bug-RT-Extension-ReportSpam@rt.cpan.org>
+
 or via the web at
-L<rt.cpan.org|http://rt.cpan.org/Public/Dist/Display.html?Name=RT-Extension-ReportSpam>.
+
+    L<rt.cpan.org|http://rt.cpan.org/Public/Dist/Display.html?Name=RT-Extension-ReportSpam>.
 
 =head1 AUTHOR
 
-Ruslan Zakirov E<lt>Ruslan.Zakirov@gmail.comE<gt>
-
-Thomas Sibley E<lt>trs@bestpractical.comE<gt>
+Best Practical Solutions, LLC E<lt>modules@bestpractical.comE<gt>
 
 =head1 LICENSE
 
