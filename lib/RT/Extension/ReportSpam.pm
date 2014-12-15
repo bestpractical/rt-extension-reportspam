@@ -4,7 +4,7 @@ use 5.008;
 use strict;
 use warnings;
 
-our $VERSION = '0.13';
+our $VERSION = '1.00';
 
 =encoding utf-8
 
@@ -17,7 +17,7 @@ RT::Extension::ReportSpam - mark tickets as spam with one click
 A simple extension that works with RT 4.0 and 4.2 which allows users
 to report a ticket as a spam message.
 
-=head1 INSTALLATION 
+=head1 INSTALLATION
 
 =over
 
@@ -33,13 +33,13 @@ May need root permissions
 
 If you are using RT 4.2 or greater, add this line:
 
-    Plugin('{{RT::Extension::ReportSpam}}');
+    Plugin('RT::Extension::ReportSpam');
 
 For RT 4.0, add this line:
 
-    Set(@Plugins, qw({{RT::Extension::ReportSpam}}));
+    Set(@Plugins, qw(RT::Extension::ReportSpam));
 
-or add C<{{RT::Extension::ReportSpam}}> to your existing C<@Plugins> line.
+or add C<RT::Extension::ReportSpam> to your existing C<@Plugins> line.
 
 You may also want to set the C<$SpamAutoDeleteThreshold> config option to the
 number of spam reports required before the system will automatically delete the
@@ -54,11 +54,6 @@ is disabled by leaving C<$SpamAutoDeleteThreshold> unset or setting it to 0.
 =item Restart your webserver
 
 =back
-
-=head1 USING ON RT 3.8
-
-Users of this extension on RT 3.8 should not upgrade past version 0.03 of this
-extension.
 
 =head1 HOW TO …
 
@@ -88,6 +83,10 @@ rights to delete tickets themselves.
 You can confirm the reports by clicking "S" after querying all tickets reported
 as spam.  If you have rights to delete tickets then they will be deleted.
 
+=head1 AUTHOR
+
+Best Practical Solutions, LLC E<lt>modules@bestpractical.comE<gt>
+
 =head1 BUGS
 
 All bugs should be reported via email to
@@ -98,13 +97,13 @@ or via the web at
 
     L<rt.cpan.org|http://rt.cpan.org/Public/Dist/Display.html?Name=RT-Extension-ReportSpam>.
 
-=head1 AUTHOR
+=head1 LICENSE AND COPYRIGHT
 
-Best Practical Solutions, LLC E<lt>modules@bestpractical.comE<gt>
+This software is Copyright (c) 2014 by Best Practical Solutions
 
-=head1 LICENSE
+This is free software, licensed under:
 
-Under the same terms as perl itself.
+  The GNU General Public License, Version 2, June 1991
 
 =cut
 
